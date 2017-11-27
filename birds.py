@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import urllib.request, urllib.parse, urllib.error
+import pprint
 
 def get_observations():
     url = 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'
@@ -12,17 +13,25 @@ def get_observations():
     lst = response.findall('result/sighting')
     print('Sighting count:', len(lst), '\n')
 
+    birds = []
     for item in lst:
         common_name = item.find('com-name').text
+        # birds.append(common_name)
         scientific_name = item.find('sci-name').text
-        quantity = item.find('how-many').text
+        # quantity = item.find('how-many').text
         observed = item.find('obs-dt').text
-        print('Common name:', common_name)
-        print('Scientific name:', scientific_name)
-        print('Observed:', observed)
-        print('Quantity:', quantity, '\n')
+        birds.append(common_name)
+        # print('Common name:', common_name)
+        # print('Scientific name:', scientific_name)
+        # print('Observed:', observed)
+        # print('Quantity:', quantity, '\n')
+    observations = 'Some interesting sighting have been recently noticed: '
+    observations += ', '.join(birds)
+    return observations
+
 
 # get_observations()
+
 
 def get_hotspots():
     url = 'http://ebird.org/ws1.1/ref/hotspot/region?rtype=country&r=PL&fmt=xml'

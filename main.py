@@ -1,5 +1,6 @@
 from mailing import *
 from weather import *
+from birds import  *
 
 def main():
     emails = get_emails()
@@ -11,6 +12,9 @@ def main():
     forecast_info = get_weather_forecast()
     print(forecast_info)
 
-    send_emails(emails, plan, forecast_info)
+    observations = get_observations()
+    print(observations)
+
+    send_emails(emails, plan, forecast_info, observations)
 
 main()
