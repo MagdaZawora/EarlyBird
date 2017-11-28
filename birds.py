@@ -1,39 +1,54 @@
 import xml.etree.ElementTree as ET
 import urllib.request, urllib.parse, urllib.error
-import pprint
-
-def get_observations():
-    url = 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'
-
-    print('Retrieving', url)
-    uh = urllib.request.urlopen(url)
-    data = uh.read()
-    response = ET.fromstring(data)
-
-    lst = response.findall('result/sighting')
-    print('Sighting count:', len(lst), '\n')
-
-    birds = []
-    for item in lst:
-        common_name = item.find('com-name').text
-        # birds.append(common_name)
-        scientific_name = item.find('sci-name').text
-        # quantity = item.find('how-many').text
-        observed = item.find('obs-dt').text
-        birds.append(common_name)
-        # print('Common name:', common_name)
-        # print('Scientific name:', scientific_name)
-        # print('Observed:', observed)
-        # print('Quantity:', quantity, '\n')
-    observations = 'Some interesting sighting have been recently noticed: '
-    observations += ', '.join(birds)
-    return observations
 
 
-# get_observations()
+class Observation:
+
+    birds_lst = ''
+
+    def get_observations(self):
+        url = 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'
+
+        print('Retrieving', url)
+        uh = urllib.request.urlopen(url)
+        data = uh.read()
+        response = ET.fromstring(data)
+
+        lst = response.findall('result/sighting')
+        print('Sighting count:', len(lst), '\n')
+
+        self.birds_lst = []
+        for item in lst:
+            common_name = item.find('com-name').text
+            # birds.append(common_name)
+            scientific_name = item.find('sci-name').text
+            # quantity = item.find('how-many').text
+            observed = item.find('obs-dt').text
+            self.birds_lst.append(common_name)
+            # print('Common name:', common_name)
+            # print('Scientific name:', scientific_name)
+            # print('Observed:', observed)
+            # print('Quantity:', quantity, '\n')
+        observations = 'Some interesting sighting have been recently noticed: '
+        observations += ', '.join(self.birds_lst)
+        return observations
 
 
-def get_hotspots():
+    def check_special(self):
+        special_lst = ['Redhead', 'Sparrow']
+        common_lst = []
+        for bird in special_lst:
+            if bird in self.birds_lst:
+                common_lst.append(bird)
+                special_info = 'And among them ' + str(len(common_lst)) + ' from our scpecial list: ' + ','.join(common_lst) + '!'
+                return special_info
+
+obs = Observation()
+obs.get_observations()
+obs.check_special()
+
+
+def get_hotspots(self):
     url = 'http://ebird.org/ws1.1/ref/hotspot/region?rtype=country&r=PL&fmt=xml'
 
     print('Retrieving', url)
