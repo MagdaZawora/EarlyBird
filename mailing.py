@@ -23,7 +23,7 @@ def get_plan():
     return plan
 
 
-def send_emails(emails, plan, forecast_info, observations, special_info):
+def send_emails(emails, plan, forecast_info, observations, must_have_info):
         server = smtplib.SMTP('smtp.gmail.com', '587')
         server.starttls()
         email_from = input('Enter email address: ')
@@ -33,7 +33,7 @@ def send_emails(emails, plan, forecast_info, observations, special_info):
             message = 'Subject: Time to do some bird-watching!\n'
             message += 'Hi ' + name + '!\n\n'
             message += observations + '\n'
-            message += special_info + '\n\n'
+            message += must_have_info + '\n\n'
             message += forecast_info + '\n\n'
             message += plan + '\n\n'
             message += 'Hope to see you tomorrow!'

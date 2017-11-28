@@ -3,7 +3,6 @@ import urllib.request, urllib.parse, urllib.error
 
 
 class Observation:
-
     birds_lst = ''
 
     def get_observations(self):
@@ -30,22 +29,27 @@ class Observation:
             # print('Observed:', observed)
             # print('Quantity:', quantity, '\n')
         observations = 'Some interesting sighting have been recently noticed: '
-        observations += ', '.join(self.birds_lst)
+        observations += ', '.join(self.birds_lst) + '.'
         return observations
 
-
-    def check_special(self):
-        special_lst = ['Redhead', 'Sparrow']
+    def check_must_have(self):
+        must_have_lst = ['Redhead', 'Sparrow']
         common_lst = []
-        for bird in special_lst:
+        for bird in must_have_lst:
             if bird in self.birds_lst:
                 common_lst.append(bird)
-                special_info = 'And among them ' + str(len(common_lst)) + ' from our scpecial list: ' + ','.join(common_lst) + '!'
-                return special_info
+                must_have_info = 'Please notice that among them ' + str(
+                    len(common_lst)) + ' from our "must-have" list: ' + ','.join(common_lst) + '!'
+            else:
+                must_have_info = 'This time none from our "must-have" list, but still worth of watching!'
+            return must_have_info
+
 
 obs = Observation()
-obs.get_observations()
-obs.check_special()
+
+
+# obs.get_observations()
+# obs.check_must_have()
 
 
 def get_hotspots(self):
@@ -71,4 +75,4 @@ def get_hotspots(self):
         print('Subnational code:', subnational_code)
         print('Location name:', location_name, '\n')
 
-# get_hotspots()
+        # get_hotspots()

@@ -12,12 +12,12 @@ def main():
     forecast_info = get_weather_forecast()
     print(forecast_info)
 
-    observations = get_observations()
+    observations = obs.get_observations()
     print(observations)
 
-    special_info = check_special()
-    print(special_info)
+    must_have_info = obs.check_must_have()
+    print(must_have_info)
 
-    send_emails(emails, plan, forecast_info, observations, special_info)
+    send_emails(emails, plan, forecast_info, observations, must_have_info)
 
 main()
