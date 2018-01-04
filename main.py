@@ -1,5 +1,3 @@
-import datetime
-import calendar
 from mailing import *
 from weather import *
 from birds import  *
