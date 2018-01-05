@@ -1,6 +1,8 @@
 from mailing import *
 from weather import *
 from birds import  *
+import schedule
+import time
 
 def main():
     emails = get_emails()
@@ -20,4 +22,8 @@ def main():
 
     send_emails(emails, plan, forecast_info, observations, must_have_info)
 
-main()
+schedule.every().friday.at("12:00").do(main)
+
+while True:
+    schedule.run_pending()
+    time.sleep(.1)
