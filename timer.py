@@ -1,4 +1,6 @@
 import datetime
+import schedule
+import time
 import smtplib
 
 
@@ -38,9 +40,9 @@ def send_emails(emails, plan):
     server.quit()
 
 
-def day_of_week():
+def job():
 
-    if datetime.date.today().strftime("%A") == 'Friday':
+    # if datetime.date.today().strftime("%A") == 'Friday':
 
         emails = get_emails()
         print(emails)
@@ -50,5 +52,9 @@ def day_of_week():
 
         send_emails(emails, plan)
 
-day_of_week()
+schedule.every(10).seconds.do(job)
+schedule.every().friday.at("15:15").do(job)
 
+while True:
+    schedule.run_pending()
+    time.sleep(1)
