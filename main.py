@@ -22,8 +22,10 @@ def main():
 
     send_emails(emails, plan, forecast_info, observations, must_have_info)
 
-schedule.every().friday.at("12:00").do(main)
+main()
 
-while True:
-    schedule.run_pending()
-    time.sleep(.1)
+# schedule.every().friday.at('12:00').do(main)
+
+# while True:
+  #  schedule.run_pending()
+   # time.sleep(.1)
