@@ -5,6 +5,7 @@ import schedule
 import time
 
 def main():
+
     emails = get_emails()
     print(emails)
 
