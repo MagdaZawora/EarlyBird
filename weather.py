@@ -3,7 +3,7 @@ import requests
 
 def get_weather_forecast():
     r = requests.get(
-        'http://api.openweathermap.org/data/2.5/forecast?lat=41&lon=-76&units=metric&APPID=')
+        'http://api.openweathermap.org/data/2.5/forecast?lat=41&lon=-76&units=metric&APPID=61249013f3fc7ab2b588e45a5c9e75c5')
     forecast = r.json()
     description = forecast['list'][0]['weather'][0]['description']
     print(description)
