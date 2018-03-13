@@ -22,7 +22,7 @@ def get_weather_forecast():
         forecast_info += description + ' with pressure of ' + str(pressure) + ' hPa, a high of ' + str(
             int(temp_max)) + ' degrees'
         forecast_info += ' and a low of ' + str(int(temp_min)) + ' degrees.' + '\n'
-        forecast_info += 'A bit freezing, so have sometning warming up with you:)'
+        forecast_info += 'A bit freezing, so have something warming up with you:)'
     return forecast_info
 
 

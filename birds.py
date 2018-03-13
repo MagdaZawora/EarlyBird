@@ -28,8 +28,7 @@ class Observation:
             # print('Scientific name:', scientific_name)
             # print('Observed:', observed)
             # print('Quantity:', quantity, '\n')
-        observations = 'Some interesting sighting have been recently noticed: '
-        observations += ', '.join(self.birds_lst) + '.'
+        observations = ', '.join(self.birds_lst) + '.'
         return observations
 
     def check_must_have(self):
@@ -41,15 +40,14 @@ class Observation:
                 must_have_info = 'Please notice that among them ' + str(
                     len(common_lst)) + ' from our "must-have" list: ' + ','.join(common_lst) + '!'
             else:
-                must_have_info = 'This time none from our "must-have" list, but still worth of watching!'
+                must_have_info = 'This time none from our "must-have" list, but still worth watching!'
             return must_have_info
 
 
 obs = Observation()
 
-
-# obs.get_observations()
-# obs.check_must_have()
+print(obs.get_observations())
+print(obs.check_must_have())
 
 
 def get_hotspots(self):
@@ -75,4 +73,4 @@ def get_hotspots(self):
         print('Subnational code:', subnational_code)
         print('Location name:', location_name, '\n')
 
-        # get_hotspots()
+# get_hotspots()

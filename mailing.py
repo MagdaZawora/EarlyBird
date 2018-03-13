@@ -32,6 +32,7 @@ def send_emails(emails, plan, forecast_info, observations, must_have_info):
         for name, email_to in emails.items():
             message = 'Subject: Time to do some bird-watching!\n'
             message += 'Hi ' + name + '!\n\n'
+            message += 'Some interesting sighting have been recently noticed: '
             message += observations + '\n'
             message += must_have_info + '\n\n'
             message += forecast_info + '\n\n'
