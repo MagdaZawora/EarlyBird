@@ -8,7 +8,7 @@ def get_observations(url):
     response = ET.fromstring(data)
 
     lst = response.findall('result/sighting')
-    print('Sighting count:', len(lst), ':')
+    print('Sighting count', len(lst), ':')
 
     birds_lst = []
     for item in lst:
@@ -29,22 +29,25 @@ def get_observations(url):
 # print(get_observations(
     # 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'))
 
-def check_must_have(observations):
-    must_have_lst = ['Redhead', 'Sparrow']
-    common_lst = []
-    for bird in must_have_lst:
+def check_must_have(observations, must_have):
+    must_have_lst = []
+    for bird in must_have:
         if bird in observations:
-            common_lst.append(bird)
-            must_have_info = 'Please notice that among them ' + str(
+            must_have_lst.append(bird)
+        return must_have_lst
+
+
+# print(check_must_have(get_observations(
+    # 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'),
+    # ['Redhead', 'Sparrow']))
+
+'''
+
+must_have_info = 'Please notice that among them ' + str(
                 len(common_lst)) + ' from our "must-have" list: ' + ','.join(common_lst) + '!'
         else:
             must_have_info = 'This time none from our "must-have" list, but still worth watching!'
-        return must_have_info
-
-
-print(check_must_have(get_observations(
-    'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml')))
-
+'''
 
 def get_hotspots(self):
     url = 'http://ebird.org/ws1.1/ref/hotspot/region?rtype=country&r=PL&fmt=xml'
