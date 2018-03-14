@@ -39,17 +39,12 @@ def send_emails(emails, plan, forecast_info, observations, must_have_lst):
                 len(must_have_lst)) + ' from our "must-have" list: ' + ','.join(must_have_lst) + '!' + '\n\n'
             else:
                 message += 'This time none from our "must-have" list, but still worth watching!'
-            if forecast_info['temp_max'] >= 0:
-                message += 'Weather forecast for tomorrow is '
-                message += forecast_info['description'] + ' with pressure of ' + str(forecast_info['pressure']) + \
-                           ' hPa, a high of ' + str(int(forecast_info['temp_max'])) + ' degrees'
-                message += ' and a low of ' + str(int(forecast_info['temp_min'])) + ' degrees.'
-            else:
-                message += 'Weather forecast for tomorrow is '
-                message += forecast_info['description'] + ' with pressure of ' + str(forecast_info['pressure']) + \
-                           ' hPa, a high of ' + str(int(forecast_info['temp_max'])) + ' degrees'
-                message += ' and a low of ' + str(int(forecast_info['temp_min'])) + ' degrees.' + '\n'
-                message += 'A bit freezing, so have something warming up with you:)'
+            message += 'Weather forecast for tomorrow is '
+            message += forecast_info['description'] + ' with pressure of ' + str(forecast_info['pressure']) + \
+                       ' hPa, a high of ' + str(int(forecast_info['temp_max'])) + ' degrees'
+            message += ' and a low of ' + str(int(forecast_info['temp_min'])) + ' degrees.' + '\n'
+            if forecast_info['temp_max'] < 0:
+                message += 'A bit freezing, so have something warming up with you:)' + '\n\n'
             message += plan + '\n\n'
             message += 'Hope to see you tomorrow!'
             server.sendmail(email_from, email_to, message)
