@@ -1,53 +1,49 @@
 import xml.etree.ElementTree as ET
 import urllib.request, urllib.parse, urllib.error
 
+def get_observations(url):
+    print('Retrieving', url)
+    uh = urllib.request.urlopen(url)
+    data = uh.read()
+    response = ET.fromstring(data)
 
-class Observation:
-    birds_lst = ''
+    lst = response.findall('result/sighting')
+    print('Sighting count:', len(lst), ':')
 
-    def get_observations(self):
-        url = 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'
+    birds_lst = []
+    for item in lst:
+        common_name = item.find('com-name').text
+        # birds.append(common_name)
+        scientific_name = item.find('sci-name').text
+        # quantity = item.find('how-many').text
+        observed = item.find('obs-dt').text
+        birds_lst.append(common_name)
+        # print('Common name:', common_name)
+        # print('Scientific name:', scientific_name)
+        # print('Observed:', observed)
+        # print('Quantity:', quantity, '\n')
+    observations = ', '.join(birds_lst) + '.'
+    print(observations, '\n')
+    return observations
 
-        print('Retrieving', url)
-        uh = urllib.request.urlopen(url)
-        data = uh.read()
-        response = ET.fromstring(data)
+# print(get_observations(
+    # 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'))
 
-        lst = response.findall('result/sighting')
-        print('Sighting count:', len(lst), '\n')
-
-        self.birds_lst = []
-        for item in lst:
-            common_name = item.find('com-name').text
-            # birds.append(common_name)
-            scientific_name = item.find('sci-name').text
-            # quantity = item.find('how-many').text
-            observed = item.find('obs-dt').text
-            self.birds_lst.append(common_name)
-            # print('Common name:', common_name)
-            # print('Scientific name:', scientific_name)
-            # print('Observed:', observed)
-            # print('Quantity:', quantity, '\n')
-        observations = ', '.join(self.birds_lst) + '.'
-        return observations
-
-    def check_must_have(self):
-        must_have_lst = ['Redhead', 'Sparrow']
-        common_lst = []
-        for bird in must_have_lst:
-            if bird in self.birds_lst:
-                common_lst.append(bird)
-                must_have_info = 'Please notice that among them ' + str(
-                    len(common_lst)) + ' from our "must-have" list: ' + ','.join(common_lst) + '!'
-            else:
-                must_have_info = 'This time none from our "must-have" list, but still worth watching!'
-            return must_have_info
+def check_must_have(observations):
+    must_have_lst = ['Redhead', 'Sparrow']
+    common_lst = []
+    for bird in must_have_lst:
+        if bird in observations:
+            common_lst.append(bird)
+            must_have_info = 'Please notice that among them ' + str(
+                len(common_lst)) + ' from our "must-have" list: ' + ','.join(common_lst) + '!'
+        else:
+            must_have_info = 'This time none from our "must-have" list, but still worth watching!'
+        return must_have_info
 
 
-obs = Observation()
-
-print(obs.get_observations())
-print(obs.check_must_have())
+print(check_must_have(get_observations(
+    'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml')))
 
 
 def get_hotspots(self):
