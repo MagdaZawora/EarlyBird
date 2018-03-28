@@ -1,6 +1,6 @@
-from mailing import *
-from weather import *
-from birds import  *
+from mailing import get_emails, get_plan, send_emails
+from weather import get_weather_forecast
+from birds import  get_observations, check_must_have
 import schedule
 import time
 
