@@ -1,14 +1,16 @@
 import xml.etree.ElementTree as ET
 import urllib.request, urllib.parse, urllib.error
+import requests
+from xml.etree import ElementTree
 
 def get_observations(url):
-    print('Retrieving', url)
+    # print('Retrieving', url)
     uh = urllib.request.urlopen(url)
     data = uh.read()
     response = ET.fromstring(data)
 
     lst = response.findall('result/sighting')
-    print('Sighting count:', len(lst),)
+    # print('Sighting count:', len(lst),)
 
     observations = []
     for item in lst:
@@ -19,8 +21,8 @@ def get_observations(url):
         observed = item.find('obs-dt').text
     return observations
 
-# print(get_observations(
-    # 'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'))
+print(get_observations(
+    'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'))
 
 
 def check_must_have(observations, must_have):
@@ -33,8 +35,7 @@ def check_must_have(observations, must_have):
 
 print(check_must_have(get_observations(
     'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'),
-    ['Redhead', 'Sparrow']))
-
+    ['Canada Goose', 'Bald Eagle']))
 
 
 def get_hotspots(url):

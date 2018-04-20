@@ -13,5 +13,5 @@ def get_weather_forecast(url):
     forecast_info = {'description': description, 'temp_min': temp_min, 'temp_max': temp_max, 'pressure': pressure}
     return forecast_info
 
-# print(get_weather_forecast(
+#print(get_weather_forecast(
   # 'http://api.openweathermap.org/data/2.5/forecast?lat=41&lon=-76&units=metric&APPID='))
