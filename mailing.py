@@ -1,6 +1,6 @@
 import smtplib
-from weather import *
-from birds import *
+from weather import get_weather_forecast
+from birds import get_observations, check_must_have
 
 def get_emails():
     emails = {}
@@ -33,7 +33,7 @@ def send_emails(emails, plan, forecast_info, observations, must_have_lst):
             message = 'Subject: Time to do some bird-watching!\n'
             message += 'Hi ' + name + '!\n\n'
             message += 'Some interesting sighting have been recently noticed: '
-            message += observations + '\n'
+            message += ', '.join(observations) + '\n'
             if must_have_lst:
                 message += 'Please notice that among them ' + str(
                 len(must_have_lst)) + ' from our "must-have" list: ' + ','.join(must_have_lst) + '!' + '\n\n'

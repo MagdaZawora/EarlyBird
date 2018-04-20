@@ -1,6 +1,5 @@
 import requests
 
-
 def get_weather_forecast(url):
     r = requests.get(url)
     forecast = r.json()
