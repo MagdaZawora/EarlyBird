@@ -22,7 +22,7 @@ def main():
 
     must_have_info = check_must_have(get_observations(
     'http://ebird.org/ws1.1/data/obs/hotspot/recent?r=L99381&back=5&maxResults=500&detail=simple&locale=en_US&fmt=xml'),
-    ['Redhead', 'Sparrow'])
+        ['Canada Goose', 'Bald Eagle'])
     print(must_have_info)
 
     send_emails(emails, plan, forecast_info, observations, must_have_info)
